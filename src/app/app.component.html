@@ -53,8 +53,8 @@
                 <div class="flex-row">
                   <div class="flex-cell">
                     <mat-form-field>
-                      <input matInput placeholder="Date" mask="00/00/0000" [formControl]="formDate">
-                      <mat-hint> <b>Mask:</b> 00/00/0000</mat-hint>
+                      <input matInput placeholder="Date" mask="V0*.00" [patterns]="customPatterns" [formControl]="formDate" [dropSpecialCharacters]="false">
+                      <!-- <mat-hint> <b>Mask:</b> 00/00/0000</mat-hint> -->
                     </mat-form-field>
                   </div>
                   <div class="flex-cell">

@@ -31,17 +31,20 @@ export const initialConfig: IConfig = {
     specialCharacters: ['/', '(', ')', '.', ':', '-', ' ', '+', ',', '@', '[', ']'],
     patterns: {
         '0': {
-            pattern: new RegExp('\\d'),
+          pattern: new RegExp('\\d'),
         },
         '9': {
-            pattern: new RegExp('\\d'),
-            optional: true
+          pattern: new RegExp('\\d'),
+          optional: true
         },
         'A': {
-            pattern: new RegExp('\[a-zA-Z0-9\]')
+          pattern: new RegExp('\[a-zA-Z0-9\]')
         },
         'S': {
-            pattern: new RegExp('\[a-zA-Z\]')
+          pattern: new RegExp('\[a-zA-Z\]')
+        },
+        'V': {
+          pattern: new RegExp('-?')
         }
     }
 };
