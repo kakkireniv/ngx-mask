@@ -13,8 +13,8 @@ export class MaskService extends MaskApplierService {
   public maskIsShown: string = '';
   private _formElement: HTMLInputElement;
   // tslint:disable-next-line
-  public onChange = (_: any) => {};
-  public onTouch = () => {};
+  public onChange = (_: any) => { };
+  public onTouch = () => { };
   public constructor(
     // tslint:disable-next-line
     @Inject(DOCUMENT) private document: any,
@@ -30,21 +30,21 @@ export class MaskService extends MaskApplierService {
     inputValue: string,
     maskExpression: string,
     position: number = 0,
-    cb: Function = () => {}
-  ): string  {
+    cb: Function = () => { }
+  ): string {
     this.maskIsShown = this.showMaskTyped
-        ? this.maskExpression.replace(/[0-9]/g, '_')
-        : '';
+      ? this.maskExpression.replace(/[0-9]/g, '_')
+      : '';
     if (!inputValue) {
       return this.prefix + this.maskIsShown;
     }
     this.maskHidden = this.hiddenSymbol
-        ? this.maskExpression.replace(/[0-9]/g, '*')
-        : '';
+      ? this.maskExpression.replace(/[0-9]/g, '*')
+      : '';
     if (!inputValue) {
       return this.maskHidden;
     }
-    const result: string  = super.applyMask(
+    const result: string = super.applyMask(
       inputValue,
       maskExpression,
       position,
@@ -52,27 +52,31 @@ export class MaskService extends MaskApplierService {
     );
     // console.log(result.length);
     Array.isArray(this.dropSpecialCharacters)
-        ? this.onChange(this._removeMask(this._removePrefix(result), this.dropSpecialCharacters))
-        : this.dropSpecialCharacters === true
-         ? this.onChange(
+      ? this.onChange(this._removeMask(this._removePrefix(result), this.dropSpecialCharacters))
+      : this.dropSpecialCharacters === true
+        ? this.onChange(
           this.isNumberValue
-             ? Number(this._removeMask(this._removePrefix(result), this.maskSpecialCharacters))
-             : this._removeMask(this._removePrefix(result), this.maskSpecialCharacters)
-            )
-         : this.onChange(this._removePrefix(result));
-          let ifMaskIsShown: string = '';
-          if (!this.showMaskTyped) {
-            return result;
-          }
-          const resLen: number = result.length;
-          const prefNmask: string = this.prefix + this.maskIsShown;
-          ifMaskIsShown = prefNmask.slice(resLen);
+            ? Number(this._removeMask(this._removePrefix(result), this.maskSpecialCharacters))
+            : this._removeMask(this._removePrefix(result), this.maskSpecialCharacters)
+        )
+        : this.onChange(this._removePrefix(result));
+    let ifMaskIsShown: string = '';
+    if (!this.showMaskTyped) {
+      return result;
+    }
+    // let ifHiddenMask: string = '';
+    // if (!this.hiddenSymbol) {
+    //   return result.length - 4;
+    // }
+    const resLen: number = result.length;
+    const prefNmask: string = this.prefix + this.maskIsShown;
+    ifMaskIsShown = prefNmask.slice(resLen);
     return result + ifMaskIsShown;
   }
 
   public applyValueChanges(
     position: number = 0,
-    cb: Function = () => {}
+    cb: Function = () => { }
   ): void {
     const maskedInput: string | number = this.applyMask(
       this._formElement.value,
