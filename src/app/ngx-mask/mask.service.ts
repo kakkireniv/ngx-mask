@@ -8,6 +8,8 @@ export class MaskService extends MaskApplierService {
   public maskExpression: string = '';
   public isNumberValue: boolean = false;
   public showMaskTyped: boolean = false;
+  public hiddenSymbol: boolean = false;
+  public maskHidden: string = '';
   public maskIsShown: string = '';
   private _formElement: HTMLInputElement;
   // tslint:disable-next-line
@@ -36,12 +38,19 @@ export class MaskService extends MaskApplierService {
     if (!inputValue) {
       return this.prefix + this.maskIsShown;
     }
+    this.maskHidden = this.hiddenSymbol
+        ? this.maskExpression.replace(/[0-9]/g, '*')
+        : '';
+    if (!inputValue) {
+      return this.maskHidden;
+    }
     const result: string  = super.applyMask(
       inputValue,
       maskExpression,
       position,
       cb
     );
+    // console.log(result.length);
     Array.isArray(this.dropSpecialCharacters)
         ? this.onChange(this._removeMask(this._removePrefix(result), this.dropSpecialCharacters))
         : this.dropSpecialCharacters === true

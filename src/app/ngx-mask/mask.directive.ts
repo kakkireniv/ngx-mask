@@ -100,6 +100,14 @@ export class MaskDirective implements ControlValueAccessor {
   }
 
   @Input()
+  public set hiddenSymbol(value: IConfig['hiddenSymbol']) {
+    if (!value) {
+      return;
+    }
+    this._maskService.hiddenSymbol = value;
+  }
+
+  @Input()
   public set showTemplate(value: IConfig['showTemplate']) {
     this._maskService.showTemplate = value;
   }
@@ -157,12 +165,6 @@ export class MaskDirective implements ControlValueAccessor {
     if (!this._maskService.prefix) {
       return;
     }
-    el.value = this._maskService.prefix;
-    if (this._maskService.showMaskTyped) {
-      this._maskService.maskIsShown = this._maskService.maskExpression.replace(/[0-9]/g, '_');
-      el.value = this._maskService.prefix + this._maskService.maskIsShown;
-      el.selectionStart = this._maskService.prefix.length + 1;
-    }
     e.preventDefault();
     el.selectionStart = el.selectionEnd = this._maskService.prefix.length;
   }
@@ -181,6 +183,7 @@ export class MaskDirective implements ControlValueAccessor {
 
   /** It writes the value in the input */
   public async writeValue(inputValue: string): Promise<void> {
+    console.log(inputValue);
     if (inputValue === undefined) {
       return;
     }
@@ -189,7 +192,8 @@ export class MaskDirective implements ControlValueAccessor {
       this._maskService.isNumberValue = true;
     }
     inputValue && this._maskService.maskExpression ||
-    this._maskService.maskExpression && (this._maskService.prefix || this.showMaskTyped)
+      this._maskService.maskExpression && (this._maskService.prefix || this._maskService.showMaskTyped ||
+         this._maskService.hiddenSymbol)
       ? (this._maskService.formElementProperty = [
         'value',
         this._maskService.applyMask(
@@ -198,6 +202,7 @@ export class MaskDirective implements ControlValueAccessor {
         )
       ])
       : (this._maskService.formElementProperty = ['value', inputValue]);
+     // console.log(this._maskService.formElementProperty );
     this._inputValue = inputValue;
   }
 
