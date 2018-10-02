@@ -42,9 +42,6 @@ export const initialConfig: IConfig = {
         },
         'S': {
           pattern: new RegExp('\[a-zA-Z\]')
-        },
-        'V': {
-          pattern: new RegExp('-?')
         }
     }
 };
