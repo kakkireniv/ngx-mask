@@ -168,13 +168,6 @@ export class MaskDirective implements ControlValueAccessor {
     ) {
       return;
     }
-<<<<<<< HEAD
-    if (!this._maskService.prefix) {
-      return;
-    }
-    e.preventDefault();
-    el.selectionStart = el.selectionEnd = this._maskService.prefix.length;
-=======
     if (this._maskService.showMaskTyped) {
       this._maskService.maskIsShown = this._maskService.maskExpression.replace(/[0-9]/g, '_');
     }
@@ -186,7 +179,6 @@ export class MaskDirective implements ControlValueAccessor {
       el.selectionStart = this._maskService.prefix.length;
       return;
     }
->>>>>>> f17b80671a0c2bfcb32840e3c211fc0046a96be7
   }
 
   @HostListener('keydown', ['$event'])
@@ -227,12 +219,7 @@ export class MaskDirective implements ControlValueAccessor {
       this._maskService.isNumberValue = true;
     }
     inputValue && this._maskService.maskExpression ||
-<<<<<<< HEAD
-      this._maskService.maskExpression && (this._maskService.prefix || this._maskService.showMaskTyped ||
-         this._maskService.hiddenSymbol)
-=======
       this._maskService.maskExpression && (this._maskService.prefix || this._maskService.showMaskTyped)
->>>>>>> f17b80671a0c2bfcb32840e3c211fc0046a96be7
       ? (this._maskService.formElementProperty = [
         'value',
         this._maskService.applyMask(
