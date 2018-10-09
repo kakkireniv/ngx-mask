@@ -26,6 +26,9 @@ export class MaskDirective implements ControlValueAccessor {
   private _inputValue: string;
   private _position: number | null = null;
   // tslint:disable-next-line
+  private _start: number;
+  private _end: number;
+  // tslint:disable-next-line
   public onChange = (_: any) => { };
   public onTouch = () => { };
   public constructor(
@@ -34,13 +37,14 @@ export class MaskDirective implements ControlValueAccessor {
     private _maskService: MaskService
   ) { }
 
+
   @Input('mask')
   public set maskExpression(value: string) {
     this._maskValue = value || '';
     if (!this._maskValue) {
       return;
     }
-    this._maskService.maskExpression = this._maskValue;
+    this._maskService.maskExpression = this._repeatPatternSymbols(this._maskValue);
     this._maskService.formElementProperty = [
       'value',
       this._maskService.applyMask(
@@ -125,7 +129,9 @@ export class MaskDirective implements ControlValueAccessor {
       this.onChange(el.value);
       return;
     }
-    const position: number = el.selectionStart as number;
+    const position: number = (el.selectionStart as number) === 1
+      ? (el.selectionStart as number) + this._maskService.prefix.length
+      : el.selectionStart as number;
     let caretShift: number = 0;
     this._maskService.applyValueChanges(
       position,
@@ -162,17 +168,46 @@ export class MaskDirective implements ControlValueAccessor {
     ) {
       return;
     }
+<<<<<<< HEAD
     if (!this._maskService.prefix) {
       return;
     }
     e.preventDefault();
     el.selectionStart = el.selectionEnd = this._maskService.prefix.length;
+=======
+    if (this._maskService.showMaskTyped) {
+      this._maskService.maskIsShown = this._maskService.maskExpression.replace(/[0-9]/g, '_');
+    }
+    el.value = !el.value || el.value === this._maskService.prefix
+      ? this._maskService.prefix + this._maskService.maskIsShown
+      : el.value;
+    /** fix of cursor position with prefix when mouse click occur */
+    if (((el.selectionStart as number) || (el.selectionEnd as number)) <= this._maskService.prefix.length) {
+      el.selectionStart = this._maskService.prefix.length;
+      return;
+    }
+>>>>>>> f17b80671a0c2bfcb32840e3c211fc0046a96be7
   }
 
   @HostListener('keydown', ['$event'])
   public a(e: KeyboardEvent): void {
-    if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 8) {
+    const el: HTMLInputElement = e.target as HTMLInputElement;
+    if (e.keyCode === 38) {
+      e.preventDefault();
+    }
+    if (e.keyCode === 37 || e.keyCode === 8) {
+      if ((el.selectionStart as number) <= this._maskService.prefix.length
+        && (el.selectionEnd as number) <= this._maskService.prefix.length) {
+        e.preventDefault();
+      }
       this.onFocus(e);
+      if (e.keyCode === 8
+        && el.selectionStart === 0
+        && el.selectionEnd === el.value.length) {
+        el.value = this._maskService.prefix;
+        this._position = this._maskService.prefix ? this._maskService.prefix.length : 1;
+        this.onInput(e);
+      }
     }
   }
 
@@ -185,15 +220,19 @@ export class MaskDirective implements ControlValueAccessor {
   public async writeValue(inputValue: string): Promise<void> {
     console.log(inputValue);
     if (inputValue === undefined) {
-      return;
+      inputValue = '';
     }
     if (typeof inputValue === 'number') {
       inputValue = String(inputValue);
       this._maskService.isNumberValue = true;
     }
     inputValue && this._maskService.maskExpression ||
+<<<<<<< HEAD
       this._maskService.maskExpression && (this._maskService.prefix || this._maskService.showMaskTyped ||
          this._maskService.hiddenSymbol)
+=======
+      this._maskService.maskExpression && (this._maskService.prefix || this._maskService.showMaskTyped)
+>>>>>>> f17b80671a0c2bfcb32840e3c211fc0046a96be7
       ? (this._maskService.formElementProperty = [
         'value',
         this._maskService.applyMask(
@@ -221,4 +260,22 @@ export class MaskDirective implements ControlValueAccessor {
   public setDisabledState(isDisabled: boolean): void {
     this._maskService.formElementProperty = ['disabled', isDisabled];
   }
+  private _repeatPatternSymbols(maskExp: string): string {
+    return maskExp.match(/{[0-9a-zA-Z]}/)
+      && maskExp.split('')
+        .reduce((accum: string, currval: string, index: number): string => {
+          this._start = (currval === '{') ? index : this._start;
+
+          if (currval !== '}') {
+            return this._maskService._findSpecialChar(currval) ? accum + currval : accum;
+          }
+          this._end = index;
+          const repeatNumber: number = Number(maskExp
+            .slice(this._start + 1, this._end));
+          const repaceWith: string = new Array(repeatNumber + 1)
+            .join(maskExp[this._start - 1]);
+          return accum + repaceWith;
+        }, '') || maskExp;
+  }
+
 }

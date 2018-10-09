@@ -126,6 +126,14 @@ Masked value: (Hel-loW)
 <input type='text' prefix="+7 " mask="(000) 000 00 00" >
 ```
 
+### sufix (string)
+   You can add sufix to you masked value
+##### Usage
+
+```html
+<input type='text' sufix=" $" mask="0000" >
+```
+
 ### dropSpecialCharacters (boolean)
    You can choose if mask will drop special character in the model, or not, default value true
 ##### Usage
@@ -152,6 +160,32 @@ Model value: 789-874.98
 ### clearIfNotMatch (boolean)
    You can choose clear the input if the input value **not match** the mask, default value false
 
+###pipe with mask expression and custom Pattern ([string, pattern])
+  You can pass array of expression and custom Pattern to pipe
+##### Usage
+
+```html
+ <span>{{phone | mask: customMaska}}</span>
+```
+and in your component
+```
+customMaska: [string, pattern];
+
+pattern =  {
+    'P': {
+        pattern: new RegExp('\\d'),
+    }};
+  
+this.customMaska = ['PPP-PPP', this.pattern];
+```
+
+###repeat mask
+  You can pass into mask pattern with brackets
+##### Usage
+
+```html
+ <input type='text' mask="A{4}">
+```
 
 ## Examples
 

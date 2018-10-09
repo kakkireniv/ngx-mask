@@ -30,12 +30,13 @@ export class MaskService extends MaskApplierService {
     inputValue: string,
     maskExpression: string,
     position: number = 0,
-    cb: Function = () => { }
-  ): string {
+    cb: Function = () => {}
+  ): string  {
+
     this.maskIsShown = this.showMaskTyped
-      ? this.maskExpression.replace(/[0-9]/g, '_')
-      : '';
-    if (!inputValue) {
+        ? this.maskExpression.replace(/[0-9]/g, '_')
+        : '';
+    if (!inputValue && this.showMaskTyped) {
       return this.prefix + this.maskIsShown;
     }
     this.maskHidden = this.hiddenSymbol
@@ -52,25 +53,21 @@ export class MaskService extends MaskApplierService {
     );
     // console.log(result.length);
     Array.isArray(this.dropSpecialCharacters)
-      ? this.onChange(this._removeMask(this._removePrefix(result), this.dropSpecialCharacters))
-      : this.dropSpecialCharacters === true
-        ? this.onChange(
+        ? this.onChange(this._removeMask(this._removeSufix(this._removePrefix(result)), this.dropSpecialCharacters))
+        : this.dropSpecialCharacters === true
+         ? this.onChange(
           this.isNumberValue
-            ? Number(this._removeMask(this._removePrefix(result), this.maskSpecialCharacters))
-            : this._removeMask(this._removePrefix(result), this.maskSpecialCharacters)
-        )
-        : this.onChange(this._removePrefix(result));
-    let ifMaskIsShown: string = '';
-    if (!this.showMaskTyped) {
-      return result;
-    }
-    // let ifHiddenMask: string = '';
-    // if (!this.hiddenSymbol) {
-    //   return result.length - 4;
-    // }
-    const resLen: number = result.length;
-    const prefNmask: string = this.prefix + this.maskIsShown;
-    ifMaskIsShown = prefNmask.slice(resLen);
+             ? Number(this._removeMask(this._removeSufix(this._removePrefix(result)), this.maskSpecialCharacters))
+             : this._removeMask(this._removeSufix(this._removePrefix(result)), this.maskSpecialCharacters)
+            )
+         : this.onChange(this._removeSufix(this._removePrefix(result)));
+          let ifMaskIsShown: string = '';
+          if (!this.showMaskTyped) {
+            return result;
+          }
+          const resLen: number = result.length;
+          const prefNmask: string = this.prefix + this.maskIsShown;
+          ifMaskIsShown = prefNmask.slice(resLen);
     return result + ifMaskIsShown;
   }
 
@@ -124,7 +121,18 @@ export class MaskService extends MaskApplierService {
     if (!this.prefix) {
       return value;
     }
-    return value ? value.replace(this.prefix, '') : value;
+    return value
+      ? value.replace(this.prefix, '')
+      : value;
+  }
+
+  private _removeSufix(value: string): string {
+    if (!this.sufix) {
+      return value;
+    }
+    return value
+      ? value.replace(this.sufix, '')
+      : value;
   }
 
   private _regExpForRemove(specialCharactersForRemove: string[]): RegExp {
