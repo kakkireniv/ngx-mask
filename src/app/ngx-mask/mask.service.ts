@@ -8,8 +8,6 @@ export class MaskService extends MaskApplierService {
   public maskExpression: string = '';
   public isNumberValue: boolean = false;
   public showMaskTyped: boolean = false;
-  public hiddenSymbol: boolean = false;
-  public maskHidden: string = '';
   public maskIsShown: string = '';
   private _formElement: HTMLInputElement;
   // tslint:disable-next-line
@@ -30,44 +28,51 @@ export class MaskService extends MaskApplierService {
     inputValue: string,
     maskExpression: string,
     position: number = 0,
-    cb: Function = () => {}
-  ): string  {
-
+    cb: Function = () => { }
+  ): string {
     this.maskIsShown = this.showMaskTyped
-        ? this.maskExpression.replace(/[0-9]/g, '_')
-        : '';
+      ? this.maskExpression.replace(/[0-9]/g, '_')
+      : '';
     if (!inputValue && this.showMaskTyped) {
       return this.prefix + this.maskIsShown;
     }
-    this.maskHidden = this.hiddenSymbol
-      ? this.maskExpression.replace(/[0-9]/g, '*')
-      : '';
-    if (!inputValue) {
-      return this.maskHidden;
-    }
+    // if (!inputValue && this.replaceStars) {
+    //   return this.saveRes;
+    // }
     const result: string = super.applyMask(
       inputValue,
       maskExpression,
       position,
       cb
     );
-    // console.log(result.length);
     Array.isArray(this.dropSpecialCharacters)
-        ? this.onChange(this._removeMask(this._removeSufix(this._removePrefix(result)), this.dropSpecialCharacters))
-        : this.dropSpecialCharacters === true
-         ? this.onChange(
+      ? this.onChange(this._removeMask(this._removeSufix(this._removePrefix(result)), this.dropSpecialCharacters))
+      : this.dropSpecialCharacters === true
+        ? this.onChange(
           this.isNumberValue
-             ? Number(this._removeMask(this._removeSufix(this._removePrefix(result)), this.maskSpecialCharacters))
-             : this._removeMask(this._removeSufix(this._removePrefix(result)), this.maskSpecialCharacters)
-            )
-         : this.onChange(this._removeSufix(this._removePrefix(result)));
-          let ifMaskIsShown: string = '';
-          if (!this.showMaskTyped) {
-            return result;
-          }
-          const resLen: number = result.length;
-          const prefNmask: string = this.prefix + this.maskIsShown;
-          ifMaskIsShown = prefNmask.slice(resLen);
+            ? Number(this._removeMask(this._removeSufix(this._removePrefix(result)), this.maskSpecialCharacters))
+            : this._removeMask(this._removeSufix(this._removePrefix(result)), this.maskSpecialCharacters)
+        )
+        : this.onChange(this._removeSufix(this._removePrefix(result)));
+    let ifMaskIsShown: string = '';
+    // console.log(result);
+    //  if (this.replaceStars) {
+    //   let res: string = '';
+    //   console.log('MIHUIL');
+    //   const pos: number = result.length;
+    //   console.log(pos, result[pos - 1]);
+    //     if (maskExpression.length - 4 > pos) {
+    //       console.log('HERE', result);
+    //     res += result.replace(result[pos - 1], '*');
+    //       return res;
+    //     }
+    //      res += result[pos - 1];
+    //   return res;
+    // }
+    const resLen: number = result.length;
+    const prefNmask: string = this.prefix + this.maskIsShown;
+    ifMaskIsShown = prefNmask.slice(resLen);
+    console.log('sdfsdf', result);
     return result + ifMaskIsShown;
   }
 

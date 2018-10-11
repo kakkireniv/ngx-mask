@@ -104,11 +104,11 @@ export class MaskDirective implements ControlValueAccessor {
   }
 
   @Input()
-  public set hiddenSymbol(value: IConfig['hiddenSymbol']) {
+  public set replaceStars(value: IConfig['replaceStars']) {
     if (!value) {
       return;
     }
-    this._maskService.hiddenSymbol = value;
+    this._maskService.replaceStars = value;
   }
 
   @Input()
@@ -228,7 +228,7 @@ export class MaskDirective implements ControlValueAccessor {
         )
       ])
       : (this._maskService.formElementProperty = ['value', inputValue]);
-     // console.log(this._maskService.formElementProperty );
+    // console.log(this._maskService.formElementProperty );
     this._inputValue = inputValue;
   }
 

@@ -54,8 +54,8 @@
                 <div class="flex-row">
                   <div class="flex-cell">
                     <mat-form-field>
-                      <input matInput placeholder="Date" mask="00/00/0000" [formControl]="formDate" [(ngModel)]="formModelDate">
-                      <mat-hint> <b>Mask:</b> 00/00/0000</mat-hint>
+                      <input matInput placeholder="Date" mask="****-****-0000" [replaceStars]="true" [formControl]="formDate" [(ngModel)]="formModelDate">
+                      <mat-hint> <b>Mask:</b> 0000-0000-0000</mat-hint>
                     </mat-form-field>
                   </div>
                   <div class="flex-cell">
@@ -249,7 +249,7 @@
                   <div class="flex-row">
                     <div class="flex-cell-padding">
                       <mat-form-field>
-                        <input matInput placeholder="Sum" mask="0000" sufix=" $" [formControl]="sufixForm" [(ngModel)]="sufixModel">
+                        <input matInput placeholder="Sum" mask= '00.00' sufix="$" [formControl]="sufixForm" [(ngModel)]="sufixModel">
                         <mat-hint><b>Mask: </b>0000</mat-hint>
                       </mat-form-field>
                     </div>
@@ -279,7 +279,7 @@
                   <div class="flex-row">
                     <div class="flex-cell-padding">
                       <mat-form-field>
-                        <input matInput placeholder="Type number or string" mask="00*.00" [formControl]="numberOrStringForm" [(ngModel)]="numberOrStringFormModel">
+                        <input matInput placeholder="Type number or string" mask="00.00" [formControl]="numberOrStringForm" [(ngModel)]="numberOrStringFormModel">
                         <mat-hint><b>Mask: </b>000.00</mat-hint>
                       </mat-form-field>
                     </div>

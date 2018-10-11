@@ -6,7 +6,7 @@ export interface IConfig {
     clearIfNotMatch: boolean;
     showTemplate: boolean;
     showMaskTyped: boolean;
-    hiddenSymbol: boolean;
+    replaceStars: boolean;
     dropSpecialCharacters: boolean | string[];
     specialCharacters: string[];
     patterns: {
@@ -28,7 +28,7 @@ export const initialConfig: IConfig = {
     clearIfNotMatch: false,
     showTemplate: false,
     showMaskTyped: false,
-    hiddenSymbol: false,
+    replaceStars: false,
     dropSpecialCharacters: true,
     specialCharacters: ['/', '(', ')', '.', ':', '-', ' ', '+', ',', '@', '[', ']'],
     patterns: {
@@ -44,6 +44,9 @@ export const initialConfig: IConfig = {
         },
         'S': {
             pattern: new RegExp('\[a-zA-Z\]')
-        }
+        },
+        // '*': {
+        //   pattern: new RegExp('[0-9]')
+        // }
     }
 };
