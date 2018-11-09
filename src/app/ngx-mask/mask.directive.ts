@@ -212,6 +212,13 @@ export class MaskDirective implements ControlValueAccessor {
     if (inputValue === undefined) {
       inputValue = '';
     }
+    if (inputValue && inputValue.indexOf(this._maskService.prefix) === 0) {
+        inputValue = inputValue.replace(this._maskService.prefix, '');
+    }
+    if (inputValue && inputValue.indexOf(this._maskService.prefix.replace(' ', '')) === 0) {
+        inputValue = inputValue.replace(this._maskService.prefix.replace(' ', ''), '');
+    }
+
     if (typeof inputValue === 'number') {
       inputValue = String(inputValue);
       this._maskService.isNumberValue = true;

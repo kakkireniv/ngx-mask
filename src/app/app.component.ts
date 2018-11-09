@@ -48,6 +48,8 @@ export class AppComponent {
     this.sufixForm = new FormControl('');
     this.repeatForm = new FormControl('');
 
+    this.dateModel2 = '+9661234567890';
+
     this.customMaska = ['PPP-PPP-PPP', this.pattern];
   }
 

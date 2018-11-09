@@ -112,7 +112,7 @@ export class MaskService extends MaskApplierService {
     this._renderer.setProperty(this._formElement, name, value);
   }
 
-  private _removeMask(
+  public _removeMask(
     value: string,
     specialCharactersForRemove: string[]
   ): string {
@@ -121,7 +121,7 @@ export class MaskService extends MaskApplierService {
       : value;
   }
 
-  private _removePrefix(value: string): string {
+  public _removePrefix(value: string): string {
     if (!this.prefix) {
       return value;
     }
