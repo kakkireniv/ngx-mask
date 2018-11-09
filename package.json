@@ -1,6 +1,6 @@
 {
   "name": "ngx-mask-2",
-  "version": "6.5.17",
+  "version": "6.5.20",
   "description": "awesome ngx mask",
   "license": "MIT",
   "angular-cli": {},
@@ -32,8 +32,9 @@
     "@angular/core": ">=6.0.0",
     "@angular/forms": ">=6.0.0"
   },
-  "dependencies": {
-    "@angular-devkit/core": "0.8.3",
+  "dependencies": {  },
+  "devDependencies": {
+	"@angular-devkit/core": "0.8.3",
     "@angular/animations": "6.1.8",
     "@angular/common": "6.1.8",
     "@angular/compiler": "6.1.8",
@@ -45,9 +46,7 @@
     "intl": "^1.2.5",
     "npm-check-updates": "2.14.2",
     "web-animations-js": "^2.3.1",
-    "zone.js": "0.8.26"
-  },
-  "devDependencies": {
+    "zone.js": "0.8.26",
     "@angular-devkit/build-angular": "0.8.3",
     "@angular/cdk": "6.4.7",
     "@angular/cli": "6.2.3",
@@ -80,8 +79,9 @@
     "webdriver-manager": "12.1.0"
   },
   "pre-commit": [
-    "lint",
-    "test"
+    "lint"
   ],
-  "ngPackage": true
+  "ngPackage": {
+	"whitelistedNonPeerDependencies": ["."]
+  }
 }

@@ -7,11 +7,11 @@ import {
 }
   from
     '@angular/material';
-import { TestMaskComponent } from './ngx-mask/test/utils/test-component.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import 'hammerjs';
+import { TestMaskComponent } from './ngx-mask/test/utils/test-component.component';
 
 import { AppComponent } from './app.component';
 import { NgxMaskModule } from './ngx-mask/ngx-mask.module';
@@ -24,6 +24,7 @@ import { NgxMaskModule } from './ngx-mask/ngx-mask.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     MatGridListModule,
     MatSidenavModule,
@@ -35,8 +36,7 @@ import { NgxMaskModule } from './ngx-mask/ngx-mask.module';
     NgxMaskModule.forRoot(),
     MatIconModule,
     MatListModule,
-    MatCardModule,
-    FormsModule
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

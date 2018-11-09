@@ -242,6 +242,36 @@
         </div>
       </div>
     </div>
+	<div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="mat-card-wr">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>Phone number</mat-card-title>
+                <mat-card-subtitle>
+                  You can add prefix value to your NgModel value
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                  <div class="flex-row">
+                    <div class="flex-cell-padding">
+                      <mat-form-field>
+                        <input matInput placeholder="Phone number" mask="(000) 000-0000" prefix="+7 " [formControl]="form2" [(ngModel)]="dateModel2" [appendPrefixToModel]="true" [showMaskTyped] = "true">
+                        <mat-hint><b>Mask: </b>+7 (000) 000 00 00</mat-hint>
+                      </mat-form-field>
+                    </div>
+                    <div class="flex-cell">
+                      <p><b>FormControl:</b> {{ form2.value ? form2.value: 'Empty' }}</p>
+                      <p><b>NgModel:</b> {{ dateModel2 ? dateModel2: 'Empty' }}</p>
+                    </div>
+                  </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-12">

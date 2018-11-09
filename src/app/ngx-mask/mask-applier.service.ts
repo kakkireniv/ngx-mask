@@ -30,7 +30,7 @@ export class MaskApplierService {
         this.maskAvailablePatterns = this._config.patterns;
         this.prefix = this._config.prefix;
         this.sufix = this._config.sufix;
-
+        this.appendPrefixToModel = this._config.appendPrefixToModel;
 
     }
     // tslint:disable-next-line:no-any
