@@ -1,5 +1,5 @@
 <a href="https://jsdaddy.github.io/ngx-mask">
-  <h1 align="center">ngx-mask</h1>
+  <h1 align="center">ngx-mask-2</h1>
 </a>
 
 [![Build Status](https://img.shields.io/travis/JsDaddy/ngx-mask.svg?branch=develop)](https://travis-ci.org/JsDaddy/ngx-mask)
@@ -12,7 +12,7 @@
 ## Installing
 
 ```bash
-$ npm install --save ngx-mask
+$ npm install --save ngx-mask-2
 ```
 
 ## Quickstart
