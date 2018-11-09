@@ -22,6 +22,7 @@ import { NgxMaskModule } from './ngx-mask/ngx-mask.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     MatGridListModule,
     MatSidenavModule,
@@ -33,8 +34,7 @@ import { NgxMaskModule } from './ngx-mask/ngx-mask.module';
     NgxMaskModule.forRoot(),
     MatIconModule,
     MatListModule,
-    MatCardModule,
-    FormsModule
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
