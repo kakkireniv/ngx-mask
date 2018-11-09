@@ -13,6 +13,7 @@ export class MaskApplierService {
     public prefix: IConfig['prefix'];
     public sufix: IConfig['sufix'];
     public customPattern: IConfig['patterns'];
+    public appendPrefixToModel: IConfig['appendPrefixToModel'];
 
 
     private _shift: Set<number>;

@@ -100,7 +100,7 @@ export class MaskDirective implements ControlValueAccessor {
     if (!value) {
       return;
     }
-    this._maskService.showMaskTyped = value;
+    this._maskService.appendPrefixToModel = value;
   }
 
   @Input()
@@ -111,6 +111,11 @@ export class MaskDirective implements ControlValueAccessor {
   @Input()
   public set clearIfNotMatch(value: IConfig['clearIfNotMatch']) {
     this._maskService.clearIfNotMatch = value;
+  }
+
+  @Input()
+  public set appendPrefixToModel(value: IConfig['appendPrefixToModel']) {
+    this._maskService.appendPrefixToModel = value;
   }
 
   @HostListener('input', ['$event'])
