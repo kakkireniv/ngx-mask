@@ -1,4 +1,4 @@
-<a href="https://jsdaddy.github.io/ngx-mask">
+<a href="https://kakkireniv.github.io/ngx-mask/">
   <h1 align="center">ngx-mask-2</h1>
 </a>
 <h4 align="center">Forked from JsDaddy/ngx-mask repository, check original repository here: <a href="https://github.com/JsDaddy/ngx-mask/">https://github.com/JsDaddy/ngx-mask/</a></h4>
