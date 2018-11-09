@@ -4,7 +4,7 @@
 
 [![Build Status](https://img.shields.io/travis/JsDaddy/ngx-mask.svg?branch=develop)](https://travis-ci.org/JsDaddy/ngx-mask)
 [![npm](https://img.shields.io/npm/v/ngx-mask.svg)](https://www.npmjs.com/package/ngx-mask)
-<a href="https://npmjs.org/ngx-mask">
+<a href="https://npmjs.org/ngx-mask-2">
   <img src="https://img.shields.io/npm/dt/ngx-mask.svg" alt="npm downloads" >
 </a>
 [![npm](https://img.shields.io/npm/dm/ngx-mask.svg)](https://www.npmjs.com/package/ngx-mask)
@@ -17,10 +17,10 @@ $ npm install --save ngx-mask
 
 ## Quickstart
 
-Import **ngx-mask** module in Angular app.
+Import **ngx-mask-2** module in Angular app.
 
 ```typescript
-import {NgxMaskModule} from 'ngx-mask'
+import {NgxMaskModule} from 'ngx-mask-2'
 
 (...)
 
@@ -124,6 +124,14 @@ Masked value: (Hel-loW)
 
 ```html
 <input type='text' prefix="+7 " mask="(000) 000 00 00" >
+```
+
+### appendPrefixToModel (boolean)
+   You can choose to append prefix value to NgModel, default value false
+##### Usage
+
+```html
+<input type='text' prefix="+7 " mask="(000) 000 00 00" [appendPrefixToModel]="true" >
 ```
 
 ### dropSpecialCharacters (boolean)

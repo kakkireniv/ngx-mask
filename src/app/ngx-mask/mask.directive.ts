@@ -101,6 +101,11 @@ export class MaskDirective implements ControlValueAccessor {
     this._maskService.clearIfNotMatch = value;
   }
 
+  @Input()
+  public set appendPrefixToModel(value: IConfig['appendPrefixToModel']) {
+    this._maskService.appendPrefixToModel = value;
+  }
+
   @HostListener('input', ['$event'])
   public onInput(e: KeyboardEvent): void {
     const el: HTMLInputElement = e.target as HTMLInputElement;
@@ -109,6 +114,7 @@ export class MaskDirective implements ControlValueAccessor {
       this.onChange(el.value);
       return;
     }
+
     const position: number = el.selectionStart as number;
     let caretShift: number = 0;
     this._maskService.applyValueChanges(

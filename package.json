@@ -1,5 +1,5 @@
 {
-  "name": "ngx-mask",
+  "name": "ngx-mask-2",
   "version": "6.1.3",
   "description": "awesome ngx mask",
   "license": "MIT",
@@ -7,6 +7,7 @@
   "keywords": [
     "ng2-mask",
     "ngx-mask",
+	"ngx-mask-2",
     "ng2",
     "angular-mask",
     "mask",
@@ -25,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NepipenkoIgor/ngx-mask.git"
+    "url": "https://github.com/kakkireni/ngx-mask.git"
   },
   "peerDependencies": {
     "@angular/common": ">=6.0.0",

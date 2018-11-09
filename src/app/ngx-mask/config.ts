@@ -7,6 +7,7 @@ export interface IConfig {
     showTemplate: boolean;
     dropSpecialCharacters: boolean | string[];
     specialCharacters: string[];
+    appendPrefixToModel: boolean;
     patterns: {
         [character: string]: {
             pattern: RegExp,
@@ -27,6 +28,7 @@ export const initialConfig: IConfig = {
     showTemplate: false,
     dropSpecialCharacters: true,
     specialCharacters: ['/', '(', ')', '.', ':', '-', ' ', '+', ',', '@', '[', ']'],
+    appendPrefixToModel: false,
     patterns: {
         '0': {
             pattern: new RegExp('\\d'),

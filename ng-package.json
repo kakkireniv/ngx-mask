@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
-  "name": "ngx-mask",
+  "name": "ngx-mask-2",
   "version": "2.5.3",
   "ngPackage": {
     "lib": {
