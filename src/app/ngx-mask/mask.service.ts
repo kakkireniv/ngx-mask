@@ -43,7 +43,7 @@ export class MaskService extends MaskApplierService {
       cb
     );
 
-    let finalResult: string = Array.isArray(this.dropSpecialCharacters)
+    let finalResult: string | number = Array.isArray(this.dropSpecialCharacters)
         ? (this._removeMask(this._removeSufix(
         (this.appendPrefixToModel ? result : this._removePrefix(result))
         ), this.dropSpecialCharacters))
