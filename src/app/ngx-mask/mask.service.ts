@@ -43,26 +43,34 @@ export class MaskService extends MaskApplierService {
       cb
     );
 
-    Array.isArray(this.dropSpecialCharacters)
-        ? this.onChange(this._removeMask(this._removeSufix(
+    let finalResult: string = Array.isArray(this.dropSpecialCharacters)
+        ? (this._removeMask(this._removeSufix(
         (this.appendPrefixToModel ? result : this._removePrefix(result))
         ), this.dropSpecialCharacters))
-        : this.dropSpecialCharacters === true
-         ? this.onChange(
+        : (this.dropSpecialCharacters === true
+         ? (
          this.isNumberValue
              ? Number(this._removeMask(this._removeSufix(
              (this.appendPrefixToModel ? result : this._removePrefix(result))), this.maskSpecialCharacters))
              : this._removeMask(this._removeSufix(
              (this.appendPrefixToModel ? result : this._removePrefix(result))), this.maskSpecialCharacters)
             )
-         : this.onChange(this._removeSufix((this.appendPrefixToModel ? result : this._removePrefix(result))));
-          let ifMaskIsShown: string = '';
-          if (!this.showMaskTyped) {
-            return result;
-          }
-          const resLen: number = result.length;
-          const prefNmask: string = this.prefix + this.maskIsShown;
-          ifMaskIsShown = prefNmask.slice(resLen);
+         : (this._removeSufix((this.appendPrefixToModel ? result : this._removePrefix(result)))));
+
+    if (this.prefix === finalResult || this.prefix.replace(' ', '') === finalResult
+        || this._removeMask(this.prefix, this.maskSpecialCharacters) === finalResult) {
+        finalResult = '';
+    }
+    this.onChange(finalResult);
+
+    let ifMaskIsShown: string = '';
+    if (!this.showMaskTyped) {
+        return result;
+    }
+    const resLen: number = result.length;
+    const prefNmask: string = this.prefix + this.maskIsShown;
+    ifMaskIsShown = prefNmask.slice(resLen);
+
     return result + ifMaskIsShown;
   }
 
@@ -76,6 +84,7 @@ export class MaskService extends MaskApplierService {
       position,
       cb
     );
+
     this._formElement.value = maskedInput;
     if (this._formElement === this.document.activeElement) {
       return;

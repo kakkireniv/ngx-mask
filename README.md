@@ -1,6 +1,7 @@
 <a href="https://jsdaddy.github.io/ngx-mask">
   <h1 align="center">ngx-mask-2</h1>
 </a>
+<h4 align="center">Forked from JsDaddy/ngx-mask repository, check original repository here: <a href="https://github.com/JsDaddy/ngx-mask/">https://github.com/JsDaddy/ngx-mask/</a></h4>
 
 [![Build Status](https://img.shields.io/travis/JsDaddy/ngx-mask.svg?branch=develop)](https://travis-ci.org/JsDaddy/ngx-mask)
 [![npm](https://img.shields.io/npm/v/ngx-mask.svg)](https://www.npmjs.com/package/ngx-mask)

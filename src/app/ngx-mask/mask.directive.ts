@@ -100,7 +100,7 @@ export class MaskDirective implements ControlValueAccessor {
     if (!value) {
       return;
     }
-    this._maskService.appendPrefixToModel = value;
+    this._maskService.showMaskTyped = value;
   }
 
   @Input()
@@ -129,6 +129,7 @@ export class MaskDirective implements ControlValueAccessor {
     const position: number = (el.selectionStart as number) === 1
       ? (el.selectionStart as number) + this._maskService.prefix.length
       : el.selectionStart as number;
+
     let caretShift: number = 0;
     this._maskService.applyValueChanges(
       position,
@@ -144,6 +145,7 @@ export class MaskDirective implements ControlValueAccessor {
         : position +
         // tslint:disable-next-line
         ((e as any).inputType === 'deleteContentBackward' ? 0 : caretShift);
+
     this._position = null;
   }
 
